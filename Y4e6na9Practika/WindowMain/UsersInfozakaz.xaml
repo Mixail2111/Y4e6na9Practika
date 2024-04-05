@@ -1,0 +1,23 @@
+﻿<Page x:Class="Y4e6na9Practika.WindowMain.UsersInfozakaz"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Y4e6na9Practika.WindowMain"
+      mc:Ignorable="d" 
+      d:DesignHeight="375" d:DesignWidth="470" 
+      Title="UsersInfozakaz">
+
+    <Grid>
+        <DataGrid x:Name="dGridService" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название заведения" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Телефон заведения" Binding="{Binding Phone}" Width="*"/>
+                <DataGridTextColumn Header="Направление" Binding="{Binding direction}" Width="*"/>
+                <DataGridTextColumn Header="Адрес" Binding="{Binding Address}" Width="*"/>
+                <DataGridTextColumn Header="Дата подачи" Binding="{Binding Date_of_submission}" Width="*"/>
+                <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

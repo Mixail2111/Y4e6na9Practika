@@ -1,0 +1,59 @@
+﻿<Page x:Class="Y4e6na9Practika.WindowMain.InfoAplicant"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Y4e6na9Practika.WindowMain"
+      xmlns:clases="clr-namespace:Y4e6na9Practika.Clases"
+      mc:Ignorable="d" 
+      d:DesignHeight="375" d:DesignWidth="480"
+      Title="InfoAplicant">
+    <Page.Resources>
+        <clases:ImageUserPathConverter x:Key="ImageUserPathConverter"/>
+    </Page.Resources>
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" MinWidth="160" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.ColumnSpan="3" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,20,0,10" Width="397" ><Run Text="Информация о "/><Run Language="ru-ru" Text="заведение"/></TextBlock>
+
+        <!-- Изображение -->
+        <Image Grid.Row="3" Source="{Binding Photo, Converter={StaticResource ImageUserPathConverter}}" Grid.RowSpan="5" Height="150" Width="150" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0" />
+
+        <!-- Название -->
+        <TextBlock Text="Название:" Grid.Row="1" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,10,0" Height="16" />
+        <Label x:Name="NameTextBox" Content ="{Binding Name}" Grid.Row="1" Grid.Column="2" Foreground="#189077" FontSize="15" VerticalAlignment="Center" Height="28" HorizontalAlignment="Left" Width="150" />
+
+        <!-- Количество мест -->
+        <TextBlock Text="Количество мест:" Grid.Row="2" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,10,0" Height="16" />
+        <Label x:Name="SeatsTextBox" Grid.Row="2"  Grid.Column="2" Content="{Binding CountMect}" Foreground="#189077" FontSize="15" VerticalAlignment="Center" Height="28" HorizontalAlignment="Left" Width="150" />
+
+        <!-- Направление -->
+        <TextBlock Text="Направление:" Grid.Row="3" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,10,0" Height="16" />
+        <Label x:Name="DirectionTextBox" Grid.Row="3"  Grid.Column="2" Content="{Binding direction}" Foreground="#189077" FontSize="15" VerticalAlignment="Center" Height="27" HorizontalAlignment="Left" Width="150" />
+
+        <!-- Адрес -->
+        <TextBlock Text="Адрес:" Grid.Row="4" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,10,0" Height="16" />
+        <Label x:Name="AddressTextBox" Grid.Row="4" Grid.Column="2" Content ="{Binding Address}" Foreground="#189077" FontSize="15" VerticalAlignment="Center" Height="27" HorizontalAlignment="Left" Width="150" />
+
+        <!-- Телефон -->
+        <TextBlock Text="Телефон:" Grid.Row="5" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,10,0" Height="16" />
+        <Label x:Name="PhoneTextBox" Grid.Row="5" Grid.Column="2" Content="{ Binding Phone}" Foreground="#189077" FontSize="15" VerticalAlignment="Center" Height="28" HorizontalAlignment="Left" Width="150" />
+
+        <!-- Кнопка Подать -->
+        <Button x:Name="btn_application_submit" Content="Подать" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="100,20,0,20" Width="120" Background="#189077" Foreground="White" FontSize="16" FontWeight="Bold" Click="btn_application_submit_Click" />
+    </Grid>
+</Page>

@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище AdmissionsСommitteeModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Application_Submission">
+          <Key>
+            <PropertyRef Name="Application_Submission_ID" />
+          </Key>
+          <Property Name="Application_Submission_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Educational_institution_ID" Type="int" />
+          <Property Name="Date_of_submission" Type="datetime" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Users_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Educational_Institution">
+          <Key>
+            <PropertyRef Name="Educational_Institution_ID" />
+          </Key>
+          <Property Name="Educational_Institution_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Address" Type="nvarchar" MaxLength="150" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="25" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="direction" Type="nvarchar" MaxLength="50" />
+          <Property Name="CountMect" Type="int" />
+        </EntityType>
+        <EntityType Name="LoggerUser">
+          <Key>
+            <PropertyRef Name="LoggerUser_ID" />
+          </Key>
+          <Property Name="LoggerUser_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Users_ID" Type="int" />
+          <Property Name="AddressIP" Type="nvarchar" MaxLength="50" />
+          <Property Name="TimeOut" Type="datetime" />
+          <Property Name="Nameuser" Type="nvarchar" MaxLength="50" />
+          <Property Name="Discription" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Roles_Id" />
+          </Key>
+          <Property Name="Roles_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameRoles" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Users_ID" />
+          </Key>
+          <Property Name="Users_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Roles_ID" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="SecondName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Application_Submission_Educational_institution">
+          <End Role="Educational_Institution" Type="Self.Educational_Institution" Multiplicity="0..1" />
+          <End Role="Application_Submission" Type="Self.Application_Submission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Educational_Institution">
+              <PropertyRef Name="Educational_Institution_ID" />
+            </Principal>
+            <Dependent Role="Application_Submission">
+              <PropertyRef Name="Educational_institution_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Application_Submission_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Application_Submission" Type="Self.Application_Submission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Users_ID" />
+            </Principal>
+            <Dependent Role="Application_Submission">
+              <PropertyRef Name="Users_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoggerUser_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="LoggerUser" Type="Self.LoggerUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Users_ID" />
+            </Principal>
+            <Dependent Role="LoggerUser">
+              <PropertyRef Name="Users_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Roles_Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Roles_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище AdmissionsСommitteeModelContainer">
+          <EntitySet Name="Application_Submission" EntityType="Self.Application_Submission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Educational_Institution" EntityType="Self.Educational_Institution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoggerUser" EntityType="Self.LoggerUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Application_Submission_Educational_institution" Association="Self.FK_Application_Submission_Educational_institution">
+            <End Role="Educational_Institution" EntitySet="Educational_Institution" />
+            <End Role="Application_Submission" EntitySet="Application_Submission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Application_Submission_Users" Association="Self.FK_Application_Submission_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Application_Submission" EntitySet="Application_Submission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoggerUser_Users" Association="Self.FK_LoggerUser_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="LoggerUser" EntitySet="LoggerUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AdmissionsСommitteeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Application_Submission">
+          <Key>
+            <PropertyRef Name="Application_Submission_ID" />
+          </Key>
+          <Property Name="Application_Submission_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Educational_institution_ID" Type="Int32" />
+          <Property Name="Date_of_submission" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Users_ID" Type="Int32" />
+          <NavigationProperty Name="Educational_Institution" Relationship="Self.FK_Application_Submission_Educational_institution" FromRole="Application_Submission" ToRole="Educational_Institution" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Application_Submission_Users" FromRole="Application_Submission" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Educational_Institution">
+          <Key>
+            <PropertyRef Name="Educational_Institution_ID" />
+          </Key>
+          <Property Name="Educational_Institution_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="direction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountMect" Type="Int32" />
+          <NavigationProperty Name="Application_Submission" Relationship="Self.FK_Application_Submission_Educational_institution" FromRole="Educational_Institution" ToRole="Application_Submission" />
+        </EntityType>
+        <EntityType Name="LoggerUser">
+          <Key>
+            <PropertyRef Name="LoggerUser_ID" />
+          </Key>
+          <Property Name="LoggerUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="Users_ID" Type="Int32" />
+          <Property Name="AddressIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeOut" Type="DateTime" Precision="3" />
+          <Property Name="Nameuser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Discription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_LoggerUser_Users" FromRole="LoggerUser" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Roles_Id" />
+          </Key>
+          <Property Name="Roles_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameRoles" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Users_ID" />
+          </Key>
+          <Property Name="Users_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Roles_ID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SecondName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Application_Submission" Relationship="Self.FK_Application_Submission_Users" FromRole="Users" ToRole="Application_Submission" />
+          <NavigationProperty Name="LoggerUser" Relationship="Self.FK_LoggerUser_Users" FromRole="Users" ToRole="LoggerUser" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+        </EntityType>
+        <Association Name="FK_Application_Submission_Educational_institution">
+          <End Role="Educational_Institution" Type="Self.Educational_Institution" Multiplicity="0..1" />
+          <End Role="Application_Submission" Type="Self.Application_Submission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Educational_Institution">
+              <PropertyRef Name="Educational_Institution_ID" />
+            </Principal>
+            <Dependent Role="Application_Submission">
+              <PropertyRef Name="Educational_institution_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Application_Submission_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Application_Submission" Type="Self.Application_Submission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Users_ID" />
+            </Principal>
+            <Dependent Role="Application_Submission">
+              <PropertyRef Name="Users_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoggerUser_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="LoggerUser" Type="Self.LoggerUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Users_ID" />
+            </Principal>
+            <Dependent Role="LoggerUser">
+              <PropertyRef Name="Users_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Roles_Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Roles_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Application_Submission" EntityType="Self.Application_Submission" />
+          <EntitySet Name="Educational_Institution" EntityType="Self.Educational_Institution" />
+          <EntitySet Name="LoggerUser" EntityType="Self.LoggerUser" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Application_Submission_Educational_institution" Association="Self.FK_Application_Submission_Educational_institution">
+            <End Role="Educational_Institution" EntitySet="Educational_Institution" />
+            <End Role="Application_Submission" EntitySet="Application_Submission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Application_Submission_Users" Association="Self.FK_Application_Submission_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Application_Submission" EntitySet="Application_Submission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoggerUser_Users" Association="Self.FK_LoggerUser_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="LoggerUser" EntitySet="LoggerUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AdmissionsСommitteeModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Application_Submission">
+            <EntityTypeMapping TypeName="AdmissionsСommitteeModel.Application_Submission">
+              <MappingFragment StoreEntitySet="Application_Submission">
+                <ScalarProperty Name="Application_Submission_ID" ColumnName="Application_Submission_ID" />
+                <ScalarProperty Name="Educational_institution_ID" ColumnName="Educational_institution_ID" />
+                <ScalarProperty Name="Date_of_submission" ColumnName="Date_of_submission" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Users_ID" ColumnName="Users_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Educational_Institution">
+            <EntityTypeMapping TypeName="AdmissionsСommitteeModel.Educational_Institution">
+              <MappingFragment StoreEntitySet="Educational_Institution">
+                <ScalarProperty Name="Educational_Institution_ID" ColumnName="Educational_Institution_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="direction" ColumnName="direction" />
+                <ScalarProperty Name="CountMect" ColumnName="CountMect" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoggerUser">
+            <EntityTypeMapping TypeName="AdmissionsСommitteeModel.LoggerUser">
+              <MappingFragment StoreEntitySet="LoggerUser">
+                <ScalarProperty Name="LoggerUser_ID" ColumnName="LoggerUser_ID" />
+                <ScalarProperty Name="Users_ID" ColumnName="Users_ID" />
+                <ScalarProperty Name="AddressIP" ColumnName="AddressIP" />
+                <ScalarProperty Name="TimeOut" ColumnName="TimeOut" />
+                <ScalarProperty Name="Nameuser" ColumnName="Nameuser" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="AdmissionsСommitteeModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Roles_Id" ColumnName="Roles_Id" />
+                <ScalarProperty Name="NameRoles" ColumnName="NameRoles" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="AdmissionsСommitteeModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Users_ID" ColumnName="Users_ID" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Roles_ID" ColumnName="Roles_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

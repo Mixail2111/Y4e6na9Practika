@@ -1,0 +1,22 @@
+﻿<Page x:Class="Y4e6na9Practika.AdminWindow.viewdatauser"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Y4e6na9Practika.AdminWindow"
+      mc:Ignorable="d" 
+      d:DesignHeight="375" d:DesignWidth="470" 
+      Title="UsersInfozakaz" IsVisibleChanged="Page_IsVisibleChanged" >
+
+    <Grid>
+        <DataGrid x:Name="dGridService" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id пользователя" Binding="{Binding Users_ID}" Width="*"/>
+                <DataGridTextColumn Header="IP адрес" Binding="{Binding AddressIP}" Width="*"/>
+                <DataGridTextColumn Header="Длительность" Binding="{Binding TimeOut}" Width="*"/>
+                <DataGridTextColumn Header="Имя пользователя" Binding="{Binding Nameuser}" Width="*"/>
+                <DataGridTextColumn Header="Описание" Binding="{Binding Discription}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
